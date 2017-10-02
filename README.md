@@ -16,7 +16,10 @@
 ###### readme
 
     database.json: 数据库迁移库: db-migrate/db-migrate-mysql 配置文件
+        相关: [db-migrate](https://db-migrate.readthedocs.io/en/latest/API/SQL/)
     .env: 环境配置库: dotenv 配置文件
+        REDIS_KEY_PREFIX: redis中key的前缀,由redisConnect.js中自动封装进去
+        PORT: 端口号
     .initial.sh: 项目依赖安装
     index.js: 启动文件
 
