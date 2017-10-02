@@ -1,0 +1,30 @@
+{
+    "name": "nodejs-api-server",
+    "version": "1.0.0",
+    "description": "nodejs,server,api-server",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "dev": "nodemon index.js",
+        "pro": "pm2 start index.js"
+    },
+    "keywords": [
+        "nodejs",
+        "server",
+        "api-server"
+    ],
+    "author": "huoxu_huoxu",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "^1.18.2",
+        "cors": "^2.8.4",
+        "db-migrate": "^0.10.0-beta.24",
+        "db-migrate-mysql": "^1.1.10",
+        "dotenv": "^4.0.0",
+        "express": "^4.16.1",
+        "ioredis": "^3.1.4",
+        "mysql": "^2.14.1",
+        "node-data-format-unification": "^1.0.2",
+        "node-server-log": "^1.1.2"
+    }
+}
