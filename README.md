@@ -7,8 +7,7 @@
 
 ##### using
 
-    1.node ./index.js
-    2.nodemon index.js
+    npm start
 
 ##### rely on
 
