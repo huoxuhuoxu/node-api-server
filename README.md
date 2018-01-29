@@ -35,6 +35,9 @@
         tools: 工具
             requireDir.js: 提供引入文件夹,解构内部文件并输出的方法
 
+##### 注
+    node-data-format-unification: 如果需要上传文件, 请去掉此中间件
+
 ##### url
 [db-migrate](https://db-migrate.readthedocs.io/en/latest/API/SQL/)
 [dotenv](https://github.com/motdotla/dotenv)       

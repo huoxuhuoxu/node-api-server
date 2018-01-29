@@ -1,6 +1,6 @@
 {
     "name": "nodejs-api-server",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "nodejs,server,api-server",
     "main": "index.js",
     "scripts": {

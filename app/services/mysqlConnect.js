@@ -10,14 +10,14 @@ const mysql_config = {
 let pool = mysql.createPool(mysql_config);
 
 // 通用语句
-const QUERY = function (str){
+const QUERY = function (...str){
     return new Promise(function(resolve, reject){
         pool.getConnection((err, conn) => {
             if(err){
                 err.status = 12001;
                 throw err;
             }
-            conn.query(str, function(err, rows, fields){
+            conn.query(...str, function(err, rows, fields){
                 conn.release();
                 if(err){
                     err.status = 12002;
