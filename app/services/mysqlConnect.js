@@ -1,6 +1,7 @@
 
 const mysql = require('mysql');
 const mysql_config = {
+    connectionLimit: 10,
     host: process.env.DB_HOST,
     post: process.env.DB_PORT,
     user: process.env.DB_USERNAME,
@@ -10,14 +11,14 @@ const mysql_config = {
 let pool = mysql.createPool(mysql_config);
 
 // 通用语句
-const QUERY = function (...str){
+const QUERY = function (...argv){
     return new Promise(function(resolve, reject){
         pool.getConnection((err, conn) => {
             if(err){
                 err.status = 12001;
                 throw err;
             }
-            conn.query(...str, function(err, rows, fields){
+            conn.query(...argv, function(err, rows, fields){
                 conn.release();
                 if(err){
                     err.status = 12002;
@@ -30,6 +31,50 @@ const QUERY = function (...str){
     });
 };
 
-module.exports = {
-    QUERY
+// 事务
+const AFFAIR = async () => {
+  
+    let connect = await new Promise(resolve => {
+        pool.getConnection((err, conn) => {
+            if (err) {
+                err.status = 12101;
+                throw err;
+            }
+            resolve(conn);
+        }); 
+    });
+
+    return {
+        next: (...argv) => {
+            if (!argv.length) {
+                connect.release();
+                let ret = {
+                    value: undefined,
+                    done: true
+                };
+                return ret;
+            }
+            return new Promise((resolve, reject) => {
+                connect.query(...argv, (err, rows, fields) => {
+                    if (err) {
+                        return reject(err);
+                    }
+                    let ret = {
+                        value: rows,
+                        done: false
+                    };
+                    resolve(ret);
+                });
+            });
+        }
+    };
+
 };
+
+
+
+module.exports = {
+    QUERY,
+    AFFAIR
+};
+
