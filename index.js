@@ -1,9 +1,16 @@
 // main
-require('dotenv').config();
-var http = require("http");
-var app = require("./app/app");
-var port = process.env.PORT || 3000;
-var server = http.createServer(app);
-server.listen(port);
+const http = require("http");
+const { port } = require("./config");
+const app = require("./app/app");
 
-console.log(`listening post: ${port}`);
+if (!module.parent) {
+
+    const server = http.createServer(app);
+    server.listen(port);
+
+    process.env.realDirName = __dirname;
+
+    console.log(`工作进程 ${process.pid} 已启动...`);
+}
+
+

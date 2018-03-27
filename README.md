@@ -2,12 +2,14 @@
 
 ##### install
 
-    chmod u+x ./initial.sh
-    ./initial.sh
+    npm install
 
 ##### using
 
-    npm start
+    npm start: 单进程运行模式
+    npm run multis: 单机多核集群模式
+    npm run dev: 开发模式, 基于nodemon
+    npm run pro: 生产模式, 基于pm2
 
 ##### rely on
 
@@ -19,11 +21,14 @@
     .env: 环境配置库: dotenv 配置文件
         REDIS_KEY_PREFIX: redis中key的前缀,由redisConnect.js中自动封装进去
         PORT: 端口号
-    .initial.sh: 项目依赖安装
     index.js: 启动文件
+    config.js: 项目配置文件
 
     public: 静态资源目录
-    migrations: 数据库文件目录
+    migrations: 数据表结构目录, 用于迁移
+
+    bin: 
+        multis.js: 集群启动入口
 
     app: 
         app.js: 主文件
