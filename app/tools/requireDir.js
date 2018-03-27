@@ -14,39 +14,37 @@ const path = require('path');
 const parserRule = /(.+)\.js$/;
 
 const reducerDirName = (dirname) => {
+
+    let obj = Object.create(null);
+
     try{
         
-        if (!fs.existsSync(dirname)) {
-            throw new Error(`不存在文件夹: ${dirname}`);
-        }
+        if (!fs.existsSync(dirname)) throw new Error(`不存在文件夹: ${dirname}`);
         let aFiles = fs.readdirSync(dirname);
-        let obj = {};
         for (let v of aFiles) {
             let arr = v.match(parserRule);
             if (arr && arr.length){
                 let fileVariable = arr[1];
-                obj[fileVariable] = require(path.join(dirname, v));
+                obj[fileVariable] = require(path.resolve(dirname, v));
             } else {
                 console.log(`启用递归解析: %s`, v);
                 obj[v] = reducerDirName(path.resolve(dirname, v));
                 continue;
             }
         }
-        return obj;
 
     } catch (err) {
-        console.log(err.toString());
-        console.log(`解构文件夹 ${dirname} 失败,请排查错误...`);
-        return {};
+        console.log(`解构文件夹 ${dirname} 失败,请排查错误...\r\n${err.toString()}`);
     }
-    
+
+    return obj;
 };
 
 module.exports = (dirname) => {
-    let sDirPath = path.join(__dirname, dirname);
-    let obj = reducerDirName(sDirPath);
-    console.log(`提取${dirname} 有效结果:`, obj);
-    return obj;
-    
+
+    let oFunc = reducerDirName(path.resolve(__dirname, dirname));
+    // console.log(`提取${dirname} 有效结果:`, oFunc);
+    return oFunc;
+
 };
 
