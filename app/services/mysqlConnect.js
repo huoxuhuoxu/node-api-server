@@ -1,3 +1,11 @@
+/**
+ *  @readme
+ *      连接mysql
+ *      
+ *      QUERY: 通用
+ *      AFFAIR: 事务
+ * 
+ */
 
 const mysql = require('mysql');
 const mysql_config = {

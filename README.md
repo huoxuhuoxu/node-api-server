@@ -23,11 +23,13 @@
         PORT: 端口号
     index.js: 启动文件
     config.js: 项目配置文件
+        PORT: 默认端口号 3000
+        STATIC_DIRNAMES: 默认静态资源目录组 [ "public" ]
 
     public: 静态资源目录
     migrations: 数据表结构目录, 用于迁移
 
-    bin: 
+    monitor: 管理监控 
         multis.js: 集群启动入口
 
     app: 
@@ -39,6 +41,10 @@
             redisConnect.js: redis连接初始化
         tools: 工具
             requireDir.js: 提供引入文件夹,解构内部文件并输出的方法
+
+    env:
+        proDirName: 项目根目录
+
 
 ##### 注
     node-data-format-unification: 如果需要上传文件, 请去掉此中间件

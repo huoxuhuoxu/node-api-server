@@ -1,22 +1,29 @@
 // app-core
-var path = require("path");
-var Express = require("express");
-var bodyParser = require("body-parser");
-var cors = require("cors");
-var formatUnification = require("node-data-format-unification");
-var reqLog = require("node-server-log");
-var readDir = require("./tools/requireDir");
-var app = Express();
+const path = require("path");
+const assert = require("assert");
+const Express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+// const formatUnification = require("node-data-format-unification");
+const reqLog = require("node-server-log");
+const readDir = require("./tools/requireDir");
+const { STATIC_DIRNAMES } = require("../config");
+const app = Express();
 
 // test
-var {
+const {
     test: testInterface
 } = readDir("../controllers");
-var {
+const {
     test: testMiddleware
 } = readDir("../middlewares");
 
-app.use(Express.static(path.join(__dirname, "../public")));
+{
+    assert(Array.isArray(STATIC_DIRNAMES), "STATIC_PATH type must be array");
+    for (const dirname of STATIC_DIRNAMES) {
+        app.use(Express.static(dirname));
+    }
+}
 
 app.use(cors());
 app.use((req, res, next) => {
@@ -30,7 +37,7 @@ app.use((req, res, next) => {
 app.use(testMiddleware);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(formatUnification());
+// app.use(formatUnification());
 app.use(reqLog());
 
 // interface
@@ -38,6 +45,8 @@ app.all("/test", function(req, res, next){
     console.log("test interface...");
     next();
 }).get("/test", testInterface).post("/test", testInterface);
+
+
 
 
 // 404
