@@ -2,7 +2,13 @@
 
 ##### install
 
-    npm install
+    1.通过命令行工具生成项目:
+        sudo npm install express-structure-app -g
+        express-structure-app [project-name]
+        进入项目后执行 npm install
+
+    2.git clone 克隆项目
+    
 
 ##### using
 
@@ -50,5 +56,6 @@
     node-data-format-unification: 如果需要上传文件, 请去掉此中间件
 
 ##### url
-[db-migrate](https://db-migrate.readthedocs.io/en/latest/API/SQL/)
-[dotenv](https://github.com/motdotla/dotenv)       
+> 命令行工具: 构建Node.js-express项目 [express-structure-app](https://github.com/huoxuhuoxu/express-structure-app)
+> 数据迁移 [db-migrate](https://db-migrate.readthedocs.io/en/latest/API/SQL/)
+> 环境变量 [dotenv](https://github.com/motdotla/dotenv)       
