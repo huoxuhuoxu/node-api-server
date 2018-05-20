@@ -56,6 +56,6 @@
     node-data-format-unification: 如果需要上传文件, 请去掉此中间件
 
 ##### url
-> 命令行工具: 构建Node.js-express项目 [express-structure-app](https://github.com/huoxuhuoxu/express-structure-app)  
+> 命令行工具: 构建此项目 [express-structure-app](https://github.com/huoxuhuoxu/express-structure-app)  
 > 数据迁移 [db-migrate](https://db-migrate.readthedocs.io/en/latest/API/SQL/)   
 > 环境变量 [dotenv](https://github.com/motdotla/dotenv)         
