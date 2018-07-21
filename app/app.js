@@ -1,11 +1,9 @@
 // app-core
-const path = require("path");
 const assert = require("assert");
 const Express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-// const formatUnification = require("node-data-format-unification");
-const reqLog = require("node-server-log");
+const morgan = require('morgan');
 const readDir = require("./tools/requireDir");
 const { STATIC_DIRNAMES } = require("../config");
 const app = Express();
@@ -37,8 +35,8 @@ app.use((req, res, next) => {
 app.use(testMiddleware);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-// app.use(formatUnification());
-app.use(reqLog());
+morgan.format('diy', ':remote-addr - [:date[clf]] ":method :url" :status');
+app.use(morgan('diy'));
 
 // interface
 app.all("/test", function(req, res, next){

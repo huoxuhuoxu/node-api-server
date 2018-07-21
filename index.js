@@ -15,7 +15,7 @@ if (!module.parent) {
     server.on("error", (err) => {
         if (err.syscall !== "listen") throw err;
 
-        switch (error.code) {
+        switch (err.code) {
             case 'EACCES':
                 console.error(PORT + ' requires elevated privileges');
                 process.exit(1);
@@ -25,7 +25,7 @@ if (!module.parent) {
                 process.exit(1);
                 break;
             default:
-                throw error;
+                throw err;
         }
         
     });
